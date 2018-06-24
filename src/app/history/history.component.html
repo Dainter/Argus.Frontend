@@ -1,0 +1,99 @@
+<div class="task-container container">
+  <div class="row">
+    <div class="col-sm">
+      <div class="card mb-3">
+        <div class="card-header">
+          History Tasks
+        </div>
+        <div class="card-body">
+          <table class="table table-sm table-hover">
+            <thead class="thead-light">
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Title</th>
+              <th scope="col">Info</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let task of myHistoryTasks">
+              <th scope="row">{{task.id}}</th>
+              <td>{{task.title}}</td>
+              <td><a [routerLink]="['./']">More</a></td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="card mb-3">
+        <div class="card-header">
+          Task Details
+        </div>
+        <div class="card-body">
+          <nav aria-label="...">
+            <ul class="pagination pagination-sm">
+              <li class="page-item"><a class="page-link" [routerLink]="['./']">Submit</a></li>
+              <li class="page-item"><a class="page-link" [routerLink]="['./']">Check</a></li>
+              <li class="page-item"><a class="page-link" [routerLink]="['./']">Analysis</a></li>
+              <li class="page-item"><a class="page-link" [routerLink]="['./']">Solve</a></li>
+              <li class="page-item"><a class="page-link" [routerLink]="['./']">Evaluate</a></li>
+              <li class="page-item"><a class="page-link" [routerLink]="['./']">Regression</a></li>
+              <li class="page-item"><a class="page-link" [routerLink]="['./']">Feedback</a></li>
+            </ul>
+          </nav>
+          <div class="form-group mb-3">
+            <div class="row">
+              <div class="col-3">
+                <label for="taskIdBox">Task ID:</label>
+                <input type="text" class="form-control" id="taskIdBox" aria-describedby="Task ID" value="100101">
+              </div>
+              <div class="col-9">
+                <label for="taskTitleBox">Task Title:</label>
+                <input type="text" class="form-control" id="taskTitleBox" aria-describedby="Task Title" value="Moodlight can not work when first start it.">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <label for="descriptionBox">Description:</label>
+                <textarea type="text" class="form-control" id="descriptionBox" aria-describedby="Description">
+This is a task assigned to me.
+                </textarea>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <label for="createOnBox">Create On:</label>
+                <input type="text" class="form-control" id="createOnBox" aria-describedby="Create On" value="2018/05/10">
+              </div>
+              <div class="col">
+                <label for="createByBox">Create By:</label>
+                <input type="text" class="form-control" id="createByBox" aria-describedby="Create By" value="Bob">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <label for="versionBox">Version:</label>
+                <input type="text" class="form-control" id="versionBox" aria-describedby="Version" value="Somaris5 VC40">
+              </div>
+            </div>
+          </div>
+          <router-outlet name="interaction"></router-outlet>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm">
+      <div class="card mb-3">
+        <div class="card-header">
+          Statistic
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Tasks by Time</h5>
+          <chart type="line" [data]="timeData" [options]="timeOptions"></chart>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Tasks by Priority</h5>
+          <chart type="pie" [data]="priorityData" [options]="priorityOptions"></chart>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
