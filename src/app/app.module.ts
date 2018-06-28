@@ -10,6 +10,8 @@ import { HomeComponent } from './home/home.component';
 import { TaskComponent } from './task/task.component';
 import { HistoryComponent } from './history/history.component';
 import { Code404Component } from './code404/code404.component';
+import { LoginComponent } from './login/login.component';
+import { WelcomeComponent } from './welcome/welcome.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,9 @@ import { Code404Component } from './code404/code404.component';
     HomeComponent,
     TaskComponent,
     HistoryComponent,
-    Code404Component
+    Code404Component,
+    LoginComponent,
+    WelcomeComponent
   ],
   imports: [
     BrowserModule,
