@@ -1,13 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {User} from '../home/home.component';
 import {LoginService} from '../shared/login.service';
+import {Observable, TimeInterval} from 'rxjs';
+import {HttpClient} from '@angular/common/http';
 
 @Component({
   selector: 'app-welcome',
   templateUrl: './welcome.component.html',
   styleUrls: ['./welcome.component.css']
 })
-export class WelcomeComponent implements OnInit {
+export class WelcomeComponent implements OnInit, OnDestroy {
 
   curUser: User;
 
@@ -17,10 +19,20 @@ export class WelcomeComponent implements OnInit {
 
   options;
 
-  constructor(private loginService: LoginService) { }
+  dataSource: Observable<any>;
+
+  users;
+
+  constructor(private loginService: LoginService, private httpClient: HttpClient) {
+    this.dataSource = this.httpClient.get<any>('/api/Values');
+  }
 
   ngOnInit() {
-    this.curUser = this.loginService.getCurrentUser();
+    this.dataSource.subscribe(
+      (data) => this.users = data
+    );
+
+    this.curUser = new User("Dainter", "CT DD DS AA CN DI NJ", "Administrator", "xiaogang.dai@siemens.com");
     this.ChartInit();
   }
 
@@ -57,5 +69,9 @@ export class WelcomeComponent implements OnInit {
         }]
       }
     };
+  }
+
+  ngOnDestroy(): void {
+    console.log(this.users);
   }
 }
