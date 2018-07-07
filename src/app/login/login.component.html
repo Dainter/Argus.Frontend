@@ -7,22 +7,23 @@
         <p></p>
         <h5 class="card-title">Siemens Auto Maintance</h5>
         <p>Please sign in at first.</p>
-        <form>
+        <form [formGroup]="formModel" >
           <div class="form-group">
-            <input type="text" class="form-control" id="email-text" placeholder="Email">
+            <input formControlName="email" type="text" class="form-control" id="email-text" placeholder="Email" >
           </div>
           <div class="form-group">
-            <input type="password" class="form-control" id="password-text" placeholder="Password">
+            <input formControlName="password" type="password" class="form-control" id="password-text" placeholder="Password" >
           </div>
+          <span class="text-danger" id="wariningLabel" [hidden]="isValid">The e-mail or password is invalid.</span>
           <div class="form-group">
-            <div class="checkbox mb-3">
+            <div [hidden]="true" class="checkbox mb-3">
               <label>
                 <input type="checkbox" value="remember-me"> Remember me
               </label>
             </div>
           </div>
+          <button type="button" class="btn btn-primary btn-block" [routerLink]="['/home']">Sign In</button>
         </form>
-        <button type="submit" class="btn btn-primary btn-block" [routerLink]="['/home']">Sign In</button>
       </div>
     </div>
   </div>

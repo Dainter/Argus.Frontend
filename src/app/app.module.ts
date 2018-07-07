@@ -12,8 +12,9 @@ import { HistoryComponent } from './history/history.component';
 import { Code404Component } from './code404/code404.component';
 import { LoginComponent } from './login/login.component';
 import { WelcomeComponent } from './welcome/welcome.component';
-import {HttpClient, HttpClientModule} from '@angular/common/http';
-import {LoginService} from './shared/login.service';
+import { HttpClient, HttpClientModule} from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule} from '@angular/forms';
+
 
 @NgModule({
   declarations: [
@@ -31,14 +32,11 @@ import {LoginService} from './shared/login.service';
     BrowserModule,
     AppRoutingModule,
     ChartModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
-  providers: [HttpClient,
-    {provide: LoginService, useFactory: (httpClient: HttpClient) => {
-        return new LoginService(httpClient);
-      },
-      deps: [HttpClient]
-    }
+  providers: [
   ],
   bootstrap: [AppComponent]
 })

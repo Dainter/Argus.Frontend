@@ -1,8 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {User} from '../home/home.component';
-import {LoginService} from '../shared/login.service';
-import {Observable, TimeInterval} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
+import {User, UserInfoService} from '../shared/user-info.service';
 
 @Component({
   selector: 'app-welcome',
@@ -19,20 +17,14 @@ export class WelcomeComponent implements OnInit, OnDestroy {
 
   options;
 
-  dataSource: Observable<any>;
-
   users;
 
-  constructor(private loginService: LoginService, private httpClient: HttpClient) {
-    this.dataSource = this.httpClient.get<any>('/api/Values');
+  constructor(private userInfoService: UserInfoService, private httpClient: HttpClient) {
   }
 
   ngOnInit() {
-    this.dataSource.subscribe(
-      (data) => this.users = data
-    );
+    this.curUser = this.userInfoService.currentUser;
 
-    this.curUser = new User("Dainter", "CT DD DS AA CN DI NJ", "Administrator", "xiaogang.dai@siemens.com");
     this.ChartInit();
   }
 

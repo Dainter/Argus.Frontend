@@ -6,11 +6,12 @@ import {LoginComponent} from './login/login.component';
 import {TaskComponent} from './task/task.component';
 import {HistoryComponent} from './history/history.component';
 import {WelcomeComponent} from './welcome/welcome.component';
-import {LoginService} from './shared/login.service';
+import {LoginGuard} from './guard/login.guard';
+import {UserInfoService} from './shared/user-info.service';
 
 const routes: Routes = [
   {path: '', redirectTo: "/login", pathMatch: 'full'},
-  {path: 'login', component: LoginComponent},
+  {path: 'login', component: LoginComponent, canDeactivate: [LoginGuard]},
   {path: 'home', component: HomeComponent,
     children: [
       {path: '', redirectTo: "welcome", pathMatch: 'full'},
@@ -25,6 +26,6 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
-  providers: [LoginService]
+  providers: [UserInfoService, LoginGuard]
 })
 export class AppRoutingModule { }

@@ -1,8 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ChartModule } from 'angular2-chartjs';
-import {LoginService} from '../shared/login.service';
-import {Observable} from 'rxjs';
-import {HttpClient} from '@angular/common/http';
 
 @Component({
   selector: 'app-home',
@@ -20,13 +16,3 @@ export class HomeComponent implements OnInit {
   }
 }
 
-export class User {
-  constructor(
-    public Name: string,
-    public Department: string,
-    public Role: string,
-    public Email: string
-  ) {
-//     public Password: string
-  }
-}
