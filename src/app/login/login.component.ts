@@ -35,7 +35,6 @@ export class LoginComponent implements OnInit {
     let userIndex = this.users.findIndex((user) => user.email === this.formModel.get("email").value);
     if ( userIndex < 0)
     {
-      console.log("Invalid email address.");
       this.isValid = false;
       this.isLoggedIn = false;
       return;
@@ -43,7 +42,6 @@ export class LoginComponent implements OnInit {
     let user = this.users[userIndex];
     if ( user.password !== this.formModel.get("password").value )
     {
-      console.log("Invalid password.");
       this.isValid = false;
       this.isLoggedIn = false;
       return;

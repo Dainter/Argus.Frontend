@@ -24,15 +24,15 @@
           <p>Name: {{curUser?.name}}</p>
           <p>Department: {{curUser?.department}}</p>
           <p>Role: {{curUser?.role}}</p>
-          <p>E-Mail: {{curUser?.email}}</p>
+          <p>E-mail: {{curUser?.email}}</p>
         </div>
       </div>
       <div class="card mb-3">
         <div class="card-header">
-          Global Defects
+          Global Distribution of Defects
         </div>
         <div class="card-body">
-          <chart [type]="type" [data]="data" [options]="options"></chart>
+          <div echarts [options]="chartOption" class="demo-chart mapChart" ></div>
         </div>
       </div>
     </div>

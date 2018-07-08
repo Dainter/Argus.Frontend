@@ -12,8 +12,9 @@ import { HistoryComponent } from './history/history.component';
 import { Code404Component } from './code404/code404.component';
 import { LoginComponent } from './login/login.component';
 import { WelcomeComponent } from './welcome/welcome.component';
-import { HttpClient, HttpClientModule} from '@angular/common/http';
+import { HttpClientModule} from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { NgxEchartsModule, NgxEchartsService } from 'ngx-echarts';
 
 
 @NgModule({
@@ -34,9 +35,10 @@ import { FormsModule, ReactiveFormsModule} from '@angular/forms';
     ChartModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxEchartsModule
   ],
-  providers: [
+  providers: [{provide: NgxEchartsService, useClass: NgxEchartsService}
   ],
   bootstrap: [AppComponent]
 })

@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class UserInfoService {
 
-  public currentUser: User;
+  public currentUser: User = new User( "Dainter", "CT DD DS NJ", "Administrator", "xiaogang.dai@siemens.com", "123456");
 
   private users: Observable<User[]>;
 

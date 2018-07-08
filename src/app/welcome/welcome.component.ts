@@ -1,69 +1,53 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {User, UserInfoService} from '../shared/user-info.service';
+import {NgxEchartsService} from 'ngx-echarts';
+import * as $ from "jquery";
 
 @Component({
   selector: 'app-welcome',
   templateUrl: './welcome.component.html',
   styleUrls: ['./welcome.component.css']
 })
-export class WelcomeComponent implements OnInit, OnDestroy {
+export class WelcomeComponent implements OnInit {
 
   curUser: User;
 
   type: string;
 
-  data;
+  chartOption;
 
-  options;
+  echarts;
 
-  users;
-
-  constructor(private userInfoService: UserInfoService, private httpClient: HttpClient) {
+  constructor(private userInfoService: UserInfoService, private es: NgxEchartsService) {
   }
 
   ngOnInit() {
     this.curUser = this.userInfoService.currentUser;
 
-    this.ChartInit();
+    this.onChartInit();
   }
 
-  ChartInit() {
-    this.type = 'bar';
-    this.data = {
-      labels: ["January", "February", "March", "April", "May", "June", "July"],
-      datasets: [
-        {
-          label: "VC40",
-          data: [65, 59, 80, 81, 56, 55, 40],
-          borderColor: "rgba(0, 255, 0, 1)",
-          borderWidth: 1,
-          backgroundColor: "rgba(0, 255, 0, 0.3)"
+  onChartInit() {
+    this.echarts = this.es.echarts;
+    let _this = this;
+    $.getJSON('assets/map/world.json', function (data ) {
+      _this.echarts.registerMap('world', data);
+      _this.chartOption = {
+        toolbox: {
+          show: true,
+          orient: 'vertical',
+          left: 'right',
+          top: 'center',
+          feature: {
+            saveAsImage: {}
+          }
         },
-        {
-          label: "VC50",
-          data: [20, 10, 12, 3, 23, 5, 4],
-          borderColor: "rgba(0, 0, 255, 1)",
-          borderWidth: 1,
-          backgroundColor: "rgba(0, 0, 255, 0.3)"
-        }
-      ]
-    };
-    this.options = {
-      responsive: true,
-      maintainAspectRatio: false,
-      scales: {
-        xAxes: [{
-          stacked: true
+        series: [{
+          type: 'map',
+          map: 'world'
         }],
-        yAxes: [{
-          stacked: true
-        }]
-      }
-    };
-  }
-
-  ngOnDestroy(): void {
-    console.log(this.users);
+      };
+    });
   }
 }
