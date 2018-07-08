@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {} from "jquery";
+import {TaskInfo, TaskInfoService} from '../shared/task-info.service';
+import {Observable} from 'rxjs';
+import {UserInfoService} from '../shared/user-info.service';
 
 @Component({
   selector: 'app-task',
@@ -8,23 +11,15 @@ import {} from "jquery";
 })
 export class TaskComponent implements OnInit {
 
-  public myHandleTasks: Array<Task>;
-  public mySubmitTasks: Array<Task>;
+  public myHandleTasks: Observable<TaskInfo[]>;
+  public mySubmitTasks: Observable<TaskInfo[]>;
 
-  constructor() { }
+  constructor( private taskInfoService: TaskInfoService, private userInfoService: UserInfoService) { }
 
   ngOnInit() {
-    this.myHandleTasks = [
-      new Task(100101, "Moodlight can not work when first start it.", "VC40", "2018/4/12", "Bob", "Feedback"),
-      new Task(100102, "Somewords transient during scaning.", "VC40", "2018/5/29", "Clare", "Feedback"),
-      new Task(100103, "Wrong screen is displayed during general workflow.", "VC50", "2018/6/7", "Alice", "Feedback"),
-    ];
-
-    this.mySubmitTasks = [
-      new Task(100205, "The [Go] button is dimmed for apply protocol.", "VC40", "2018/5/13", "Alic", "Tick Check"),
-      new Task(100206, "An exception pops when change topo length at ready to load screen.", "VC50", "2018/6/2", "Alice", "Solve"),
-    ];
-
+    let username = this.userInfoService.currentUser.Name;
+    this.myHandleTasks = this.taskInfoService.getHandleTasks( username );
+    this.mySubmitTasks = this.taskInfoService.getSubmitTasks( username );
   }
 
 }

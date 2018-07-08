@@ -18,10 +18,10 @@ export class LoginComponent implements OnInit {
   formModel: FormGroup;
 
   constructor( private userService: UserInfoService ) {
-    let fb = new FormBuilder();
+    const fb = new FormBuilder();
     this.formModel = fb.group({
-      email: [""],
-      password: [""]
+      email: ["isaac@siemens.com"],
+      password: ["123456"]
     });
   }
 
@@ -32,15 +32,15 @@ export class LoginComponent implements OnInit {
   }
 
   authentication(){
-    let userIndex = this.users.findIndex((user) => user.email === this.formModel.get("email").value);
+    const userIndex = this.users.findIndex((curUser) => curUser.Email === this.formModel.get("email").value);
     if ( userIndex < 0)
     {
       this.isValid = false;
       this.isLoggedIn = false;
       return;
     }
-    let user = this.users[userIndex];
-    if ( user.password !== this.formModel.get("password").value )
+    const user = this.users[userIndex];
+    if ( user.Password !== this.formModel.get("password").value )
     {
       this.isValid = false;
       this.isLoggedIn = false;
