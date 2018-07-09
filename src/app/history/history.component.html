@@ -86,12 +86,12 @@ This is a task assigned to me.
           Statistic
         </div>
         <div class="card-body">
-          <h5 class="card-title">Tasks by Time</h5>
-          <chart type="line" [data]="timeData" [options]="timeOptions"></chart>
+          <h5 class="card-title">Tasks by Priority</h5>
+          <div echarts [options]="priorityOptions" class="echart"></div>
         </div>
         <div class="card-body">
-          <h5 class="card-title">Tasks by Priority</h5>
-          <chart type="pie" [data]="priorityData" [options]="priorityOptions"></chart>
+          <h5 class="card-title">Tasks by Time</h5>
+          <div echarts [options]="timeOptions" class="echart"></div>
         </div>
       </div>
     </div>
