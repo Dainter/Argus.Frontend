@@ -16,6 +16,7 @@ import { HttpClientModule} from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { NgxEchartsModule, NgxEchartsService } from 'ngx-echarts';
 import { TaskDetailsComponent } from './task-details/task-details.component';
+import { AnalysisComponent } from './analysis/analysis/analysis.component';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { TaskDetailsComponent } from './task-details/task-details.component';
     Code404Component,
     LoginComponent,
     WelcomeComponent,
-    TaskDetailsComponent
+    TaskDetailsComponent,
+    AnalysisComponent
   ],
   imports: [
     BrowserModule,

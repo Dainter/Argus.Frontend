@@ -1,0 +1,53 @@
+<div class="welcome-container container">
+  <div class="row">
+    <div class="col">
+      <div class="card mb-3">
+        <div class="card-header">
+          Tasks under analysis
+        </div>
+        <div class="card-body">
+          <table class="table table-sm table-hover">
+            <thead class="thead-light">
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Title</th>
+              <th scope="col">Priority</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let task of myAnalysisTasks | async">
+              <th scope="row">{{task.ID}}</th>
+              <td>{{task.Title}}</td>
+              <td>{{task.Priority}}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-3 mb-3">
+      <div class="card mb-3">
+        <div class="card-header">
+          User Behaviors
+        </div>
+        <div class="card-body">
+          <div class="list-group" id="list-tab" role="tablist">
+            <a class="list-group-item list-group-item-action" *ngFor="let operation of myUserBehaviors">{{operation}}</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-9 mb-3">
+      <div class="card mb-3">
+        <div class="card-header">
+          KB Graph
+        </div>
+        <div class="card-body">
+          <div echarts [options]="chartOption" class="kb-chart" ></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

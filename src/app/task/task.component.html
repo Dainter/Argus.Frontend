@@ -15,7 +15,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let task of myHandleTasks | async" (click)="onClick(task.ID)">
+            <tr *ngFor="let task of myHandleTasks | async" (click)="onClick(task)">
               <th scope="row">{{task.ID}}</th>
               <td>{{task.Title}}</td>
               <td>{{task.Priority}}</td>
@@ -39,7 +39,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let task of mySubmitTasks | async" (click)="onClick(task.ID)">
+            <tr *ngFor="let task of mySubmitTasks | async" (click)="onClick(task)" >
               <th scope="row">{{task.ID}}</th>
               <td>{{task.Title}}</td>
               <td>{{task.Priority}}</td>

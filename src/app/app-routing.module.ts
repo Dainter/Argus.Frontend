@@ -8,6 +8,7 @@ import {HistoryComponent} from './history/history.component';
 import {WelcomeComponent} from './welcome/welcome.component';
 import {LoginGuard} from './guard/login.guard';
 import {UserInfoService} from './shared/user-info.service';
+import {AnalysisComponent} from './analysis/analysis/analysis.component';
 
 const routes: Routes = [
   {path: '', redirectTo: "/login", pathMatch: 'full'},
@@ -17,7 +18,8 @@ const routes: Routes = [
       {path: '', redirectTo: "welcome", pathMatch: 'full'},
       {path: 'welcome', component: WelcomeComponent},
       {path: 'dashboard', component: TaskComponent},
-      {path: 'history', component: HistoryComponent}
+      {path: 'history', component: HistoryComponent},
+      {path: 'analysis', component: AnalysisComponent}
     ]
   },
   {path: '**', component: Code404Component}

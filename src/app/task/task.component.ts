@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {TaskInfo, TaskInfoService} from '../shared/task-info.service';
+import {Task, TaskInfoService} from '../shared/task-info.service';
 import {Observable} from 'rxjs';
 import {UserInfoService} from '../shared/user-info.service';
 
@@ -10,20 +10,24 @@ import {UserInfoService} from '../shared/user-info.service';
 })
 export class TaskComponent implements OnInit {
 
-  public myHandleTasks: Observable<TaskInfo[]>;
-  public mySubmitTasks: Observable<TaskInfo[]>;
+  public myHandleTasks: Observable<Task[]>;
+  public mySubmitTasks: Observable<Task[]>;
 
-  constructor( private taskInfoService: TaskInfoService, private userInfoService: UserInfoService) { }
+  constructor( private taskInfoService: TaskInfoService, private userInfoService: UserInfoService) {
+
+  }
 
   ngOnInit() {
-    let username = this.userInfoService.currentUser.Name;
+
+    const username = this.userInfoService.currentUser.Name;
     this.myHandleTasks = this.taskInfoService.getHandleTasks( username );
     this.mySubmitTasks = this.taskInfoService.getSubmitTasks( username );
 
   }
 
-  onClick( id: string){
-    console.log( id);
+  onClick( curTask: Task){
+    console.log( curTask );
+
   }
 
 }
