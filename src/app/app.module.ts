@@ -17,6 +17,10 @@ import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { NgxEchartsModule, NgxEchartsService } from 'ngx-echarts';
 import { TaskDetailsComponent } from './task-details/task-details.component';
 import { AnalysisComponent } from './analysis/analysis/analysis.component';
+import { BasicInfoComponent } from './interactions/basic-info/basic-info.component';
+import { TicketCheckComponent } from './interactions/ticket-check/ticket-check.component';
+import { PreAnalysisComponent } from './interactions/pre-analysis/pre-analysis.component';
+import { SolveComponent } from './interactions/solve/solve.component';
 
 
 @NgModule({
@@ -31,7 +35,11 @@ import { AnalysisComponent } from './analysis/analysis/analysis.component';
     LoginComponent,
     WelcomeComponent,
     TaskDetailsComponent,
-    AnalysisComponent
+    AnalysisComponent,
+    BasicInfoComponent,
+    TicketCheckComponent,
+    PreAnalysisComponent,
+    SolveComponent
   ],
   imports: [
     BrowserModule,

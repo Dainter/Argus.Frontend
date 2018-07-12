@@ -12,6 +12,13 @@ export class TaskInfoService {
   constructor( private httpClient: HttpClient ) {
   }
 
+  public currentTask: Task = this.getDefaultTask();
+
+  getDefaultTask(): Task {
+    return new Task(
+      "", "", "", 0, "", "", "", "", "", "", [], );
+  }
+
   getHandleTasks( username: string): Observable<Task[]> {
     return this.httpClient.get<any>('/api/HandleTasks?name=' + username);
   }
@@ -33,7 +40,7 @@ export class Task {
     public DeviceId: string,
     public StartTime: string,
     public EndTime: string,
-    public Interaction: AbstractInteraction[]
+    public Interactions: AbstractInteraction[]
   ) {
   }
 }

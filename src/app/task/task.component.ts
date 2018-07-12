@@ -10,6 +10,8 @@ import {UserInfoService} from '../shared/user-info.service';
 })
 export class TaskComponent implements OnInit {
 
+  public selectedTask = this.taskInfoService.getDefaultTask();
+
   public myHandleTasks: Observable<Task[]>;
   public mySubmitTasks: Observable<Task[]>;
 
@@ -26,8 +28,8 @@ export class TaskComponent implements OnInit {
   }
 
   onClick( curTask: Task){
-    console.log( curTask );
-
+    this.taskInfoService.currentTask = curTask;
+    this.selectedTask = curTask;
   }
 
 }

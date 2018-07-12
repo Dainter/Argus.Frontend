@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import * as $ from 'jquery';
+import {Task, TaskInfoService} from '../shared/task-info.service';
 
 @Component({
   selector: 'app-task-details',
@@ -7,9 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TaskDetailsComponent implements OnInit {
 
-  constructor() { }
+  @Input()
+  currentTask: Task;
+
+  constructor() {
+
+  }
 
   ngOnInit() {
+
+  }
+
+  onPageClick(id : number) {
+    console.log(id);
   }
 
 }

@@ -15,7 +15,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let task of myHandleTasks | async" (click)="onClick(task)">
+            <tr *ngFor="let task of myHandleTasks | async" (click)="onClick(task)" [routerLink]="['./']">
               <th scope="row">{{task.ID}}</th>
               <td>{{task.Title}}</td>
               <td>{{task.Priority}}</td>
@@ -50,7 +50,7 @@
       </div>
     </div>
     <div class="col-sm">
-      <app-task-details></app-task-details>
+      <app-task-details [currentTask]="selectedTask" ></app-task-details>
     </div>
   </div>
 </div>

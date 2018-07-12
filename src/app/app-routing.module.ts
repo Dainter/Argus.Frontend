@@ -9,6 +9,10 @@ import {WelcomeComponent} from './welcome/welcome.component';
 import {LoginGuard} from './guard/login.guard';
 import {UserInfoService} from './shared/user-info.service';
 import {AnalysisComponent} from './analysis/analysis/analysis.component';
+import {BasicInfoComponent} from './interactions/basic-info/basic-info.component';
+import {TicketCheckComponent} from './interactions/ticket-check/ticket-check.component';
+import {PreAnalysisComponent} from './interactions/pre-analysis/pre-analysis.component';
+import {SolveComponent} from './interactions/solve/solve.component';
 
 const routes: Routes = [
   {path: '', redirectTo: "/login", pathMatch: 'full'},
@@ -17,7 +21,14 @@ const routes: Routes = [
     children: [
       {path: '', redirectTo: "welcome", pathMatch: 'full'},
       {path: 'welcome', component: WelcomeComponent},
-      {path: 'dashboard', component: TaskComponent},
+      {path: 'dashboard', component: TaskComponent,
+        children: [
+          {path: '', component: BasicInfoComponent},
+          {path: 'TicketCheck', component: TicketCheckComponent},
+          {path: 'PreAnalysis', component: PreAnalysisComponent},
+          {path: 'Solve', component: SolveComponent}
+        ]
+      },
       {path: 'history', component: HistoryComponent},
       {path: 'analysis', component: AnalysisComponent}
     ]

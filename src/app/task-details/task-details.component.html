@@ -2,57 +2,55 @@
   <div class="card-header">
     Task Details
   </div>
-  <div class="card-body">
+  <div class="card-body" *ngIf="currentTask.ID !== ''">
     <nav aria-label="...">
       <ul class="pagination pagination-sm">
-        <li class="page-item"><a class="page-link" [routerLink]="['./']">Submit</a></li>
-        <li class="page-item"><a class="page-link" [routerLink]="['./']">Check</a></li>
-        <li class="page-item"><a class="page-link" [routerLink]="['./']">Analysis</a></li>
-        <li class="page-item"><a class="page-link" [routerLink]="['./']">Solve</a></li>
-        <li class="page-item"><a class="page-link" [routerLink]="['./']">Evaluate</a></li>
-        <li class="page-item"><a class="page-link" [routerLink]="['./']">Regression</a></li>
-        <li class="page-item"><a class="page-link" [routerLink]="['./']">Feedback</a></li>
+        <li class="page-item"><a class="page-link" [routerLink]="['./']">Basic Info</a></li>
+        <li class="page-item" *ngFor="let interaction of currentTask.Interactions">
+          <a class="page-link" [routerLink]="['./', interaction.CurrentStep]">{{interaction.CurrentStep}}</a>
+        </li>
       </ul>
     </nav>
     <div class="form-group mb-3">
       <div class="row">
         <div class="col-3">
           <label for="taskIdBox">Task ID:</label>
-          <input type="text" class="form-control" id="taskIdBox" aria-describedby="Task ID" value="100101">
+          <input type="text" class="form-control" id="taskIdBox" readonly aria-describedby="Task ID" value="{{currentTask.ID}}">
         </div>
         <div class="col-9">
           <label for="taskTitleBox">Task Title:</label>
-          <input type="text" class="form-control" id="taskTitleBox" aria-describedby="Task Title"
-                 value="Moodlight can not work when first start it.">
+          <input type="text" class="form-control" id="taskTitleBox" readonly aria-describedby="Task Title" value="{{currentTask.Title}}">
         </div>
       </div>
       <div class="row">
         <div class="col">
           <label for="descriptionBox">Description:</label>
-          <textarea type="text" class="form-control" id="descriptionBox" aria-describedby="Description">
-This is a task assigned to me.
-                </textarea>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col">
-          <label for="createOnBox">Create On:</label>
-          <input type="text" class="form-control" id="createOnBox" aria-describedby="Create On"
-                 value="2018/05/10">
-        </div>
-        <div class="col">
-          <label for="createByBox">Create By:</label>
-          <input type="text" class="form-control" id="createByBox" aria-describedby="Create By" value="Bob">
-        </div>
-      </div>
-      <div class="row">
-        <div class="col">
-          <label for="versionBox">Version:</label>
-          <input type="text" class="form-control" id="versionBox" aria-describedby="Version"
-                 value="Somaris5 VC40">
+          <textarea type="text" class="form-control" id="descriptionBox" readonly aria-describedby="Description" value="{{currentTask.Description}}"></textarea>
         </div>
       </div>
     </div>
-    <router-outlet name="interaction"></router-outlet>
+    <router-outlet></router-outlet>
+  </div>
+  <div class="card-body" *ngIf="currentTask.ID === ''">
+    <nav aria-label="...">
+    </nav>
+    <div class="form-group mb-3">
+      <div class="row">
+        <div class="col-3">
+          <label for="taskIdBox">Task ID:</label>
+          <input type="text" class="form-control" readonly aria-describedby="Task ID">
+        </div>
+        <div class="col-9">
+          <label for="taskTitleBox">Task Title:</label>
+          <input type="text" class="form-control" readonly aria-describedby="Task Title">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <label for="descriptionBox">Description:</label>
+          <textarea type="text" class="form-control" readonly aria-describedby="Description"></textarea>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
