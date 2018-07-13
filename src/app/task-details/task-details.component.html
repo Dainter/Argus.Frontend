@@ -5,9 +5,9 @@
   <div class="card-body" *ngIf="currentTask.ID !== ''">
     <nav aria-label="...">
       <ul class="pagination pagination-sm">
-        <li class="page-item"><a class="page-link" [routerLink]="['./']">Basic Info</a></li>
-        <li class="page-item" *ngFor="let interaction of currentTask.Interactions">
-          <a class="page-link" [routerLink]="['./', interaction.CurrentStep]">{{interaction.CurrentStep}}</a>
+        <li class="page-item"><a class="page-link" [routerLink]="['./']">BasicInfo</a></li>
+        <li class="page-item" *ngFor="let interaction of currentTask.Interactions, let i = index">
+          <a class="page-link" [routerLink]="['./', interaction.CurrentStep, i ]">{{interaction.CurrentStep}}</a>
         </li>
       </ul>
     </nav>

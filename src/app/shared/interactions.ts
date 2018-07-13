@@ -45,3 +45,37 @@ export class Solve extends AbstractInteraction{
     super( CreateTime, CurrentStep , Handler );
   }
 }
+
+export class Evaluate extends AbstractInteraction{
+  constructor (
+    public CreateTime: string,
+    public CurrentStep: string,
+    public Handler: string,
+    public SolutionComments: string
+  ) {
+    super( CreateTime, CurrentStep , Handler );
+  }
+}
+
+export class Regression extends AbstractInteraction{
+  constructor (
+    public CreateTime: string,
+    public CurrentStep: string,
+    public Handler: string,
+    public TestReport: string
+  ) {
+    super( CreateTime, CurrentStep , Handler );
+  }
+}
+
+export class Feedback extends AbstractInteraction{
+  constructor (
+    public CreateTime: string,
+    public CurrentStep: string,
+    public Handler: string,
+    public FixPlan: string,
+    public Feedback: string
+  ) {
+    super( CreateTime, CurrentStep , Handler );
+  }
+}

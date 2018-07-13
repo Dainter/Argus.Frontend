@@ -2,29 +2,34 @@
   <div class="row">
     <div class="col">
       <label for="handleByBox">Handle By:</label>
-      <input type="text" class="form-control" id="handleByBox" readonly aria-describedby="Handle By">
+      <input type="text" class="form-control" id="handleByBox" readonly aria-describedby="Handle By"
+             value="{{solve.Handler}}">
     </div>
     <div class="col">
       <label for="submitOnBox">Submit On:</label>
-      <input type="datetime-local" class="form-control" id="submitOnBox" readonly aria-describedby="Submit On">
+      <input type="text" class="form-control" id="submitOnBox" readonly aria-describedby="Submit On"
+             value="{{solve.CreateTime}}">
     </div>
   </div>
   <div class="row">
     <div class="col">
       <label for="rootCauseBox">Root Cause:</label>
-      <textarea type="text" class="form-control" id="rootCauseBox" readonly aria-describedby="Root Cause"></textarea>
+      <textarea type="text" class="form-control" id="rootCauseBox" readonly aria-describedby="Root Cause"
+                value="{{solve.RootCause}}"></textarea>
     </div>
   </div>
   <div class="row">
     <div class="col">
       <label for="implementationBox">Implementation:</label>
-      <textarea type="text" class="form-control" id="implementationBox" readonly aria-describedby="Implementation"></textarea>
+      <textarea type="text" class="form-control" id="implementationBox" readonly aria-describedby="Implementation"
+                value="{{solve.Implementation}}"></textarea>
     </div>
   </div>
   <div class="row">
     <div class="col">
       <label for="testSuggestionBox">Test Suggestion:</label>
-      <textarea type="text" class="form-control" id="testSuggestionBox" readonly aria-describedby="Test Suggestion"></textarea>
+      <textarea type="text" class="form-control" id="testSuggestionBox" readonly aria-describedby="Test Suggestion"
+                value="{{solve.TestSuggestion}}"></textarea>
     </div>
   </div>
 </div>

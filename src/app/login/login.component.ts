@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
   constructor( private userService: UserInfoService ) {
     const fb = new FormBuilder();
     this.formModel = fb.group({
-      email: ["isaac@siemens.com"],
+      email: ["clare@siemens.com"],
       password: ["123456"]
     });
   }

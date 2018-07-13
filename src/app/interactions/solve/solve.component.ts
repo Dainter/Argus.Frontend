@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {TaskInfoService} from '../../shared/task-info.service';
+import {ActivatedRoute, Params} from '@angular/router';
+import {Solve} from '../../shared/interactions';
 
 @Component({
   selector: 'app-solve',
@@ -8,10 +10,16 @@ import {TaskInfoService} from '../../shared/task-info.service';
 })
 export class SolveComponent implements OnInit {
 
-  constructor( private taskInfoService: TaskInfoService ) { }
+  interactionId: number;
+
+  solve: Solve;
+
+  constructor( private routeInfo: ActivatedRoute,
+               private taskInfoService: TaskInfoService ) { }
 
   ngOnInit() {
-    console.log(this.taskInfoService.currentTask.ID);
+    this.routeInfo.params.subscribe((params: Params) => this.interactionId = params["interactionId"]);
+    this.solve = <Solve>this.taskInfoService.currentTask.Interactions[this.interactionId];
   }
 
 }

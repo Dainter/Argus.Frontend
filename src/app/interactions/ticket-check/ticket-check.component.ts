@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {TaskInfoService} from '../../shared/task-info.service';
+import {ActivatedRoute, Params} from '@angular/router';
+import {TicketCheck} from '../../shared/interactions';
 
 @Component({
   selector: 'app-ticket-check',
@@ -8,10 +10,16 @@ import {TaskInfoService} from '../../shared/task-info.service';
 })
 export class TicketCheckComponent implements OnInit {
 
-  constructor( private taskInfoService: TaskInfoService ) { }
+  interactionId: number;
+
+  ticketCheck: TicketCheck;
+
+  constructor( private routeInfo: ActivatedRoute,
+               private taskInfoService: TaskInfoService ) { }
 
   ngOnInit() {
-    console.log(this.taskInfoService.currentTask.ID);
+    this.routeInfo.params.subscribe((params: Params) => this.interactionId = params["interactionId"]);
+    this.ticketCheck = <TicketCheck>this.taskInfoService.currentTask.Interactions[this.interactionId];
   }
 
 }

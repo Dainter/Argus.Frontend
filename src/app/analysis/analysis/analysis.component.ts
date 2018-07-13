@@ -42,7 +42,7 @@ export class AnalysisComponent implements OnInit {
           type: 'graph',
           layout: 'none',
           symbolSize: 50,
-          roam: true,
+          roam: false,
           label: {
             normal: {
               show: true

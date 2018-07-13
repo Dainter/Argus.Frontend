@@ -2,23 +2,27 @@
   <div class="row">
     <div class="col">
       <label for="handleByBox">Handle By:</label>
-      <input type="text" class="form-control" id="handleByBox" readonly aria-describedby="Handle By">
+      <input type="text" class="form-control" id="handleByBox" readonly aria-describedby="Handle By"
+             value="{{preAnalysis.Handler}}">
     </div>
     <div class="col">
       <label for="submitOnBox">Submit On:</label>
-      <input type="datetime-local" class="form-control" id="submitOnBox" readonly aria-describedby="Submit On">
+      <input type="text" class="form-control" id="submitOnBox" readonly aria-describedby="Submit On"
+             value="{{preAnalysis.CreateTime}}">
     </div>
   </div>
   <div class="row">
     <div class="col">
       <label for="analysisResultBox">Analysis Result:</label>
-      <textarea type="text" class="form-control" id="analysisResultBox" readonly aria-describedby="Analysis Result"></textarea>
+      <textarea type="text" class="form-control" id="analysisResultBox" readonly aria-describedby="Analysis Result"
+                value="{{preAnalysis.AnalysisResult}}"></textarea>
     </div>
   </div>
   <div class="row">
     <div class="col">
       <label for="analysisSuggestionBox">Analysis Suggestion:</label>
-      <textarea type="text" class="form-control" id="analysisSuggestionBox" readonly aria-describedby="Analysis Suggestion"></textarea>
+      <textarea type="text" class="form-control" id="analysisSuggestionBox" readonly aria-describedby="Analysis Suggestion"
+                value="{{preAnalysis.AnalysisSuggestion}}"></textarea>
     </div>
   </div>
 </div>

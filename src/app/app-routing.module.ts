@@ -13,6 +13,9 @@ import {BasicInfoComponent} from './interactions/basic-info/basic-info.component
 import {TicketCheckComponent} from './interactions/ticket-check/ticket-check.component';
 import {PreAnalysisComponent} from './interactions/pre-analysis/pre-analysis.component';
 import {SolveComponent} from './interactions/solve/solve.component';
+import {EvaluateComponent} from './interactions/evaluate/evaluate.component';
+import {RegressionComponent} from './interactions/regression/regression.component';
+import {FeedbackComponent} from './interactions/feedback/feedback.component';
 
 const routes: Routes = [
   {path: '', redirectTo: "/login", pathMatch: 'full'},
@@ -24,9 +27,12 @@ const routes: Routes = [
       {path: 'dashboard', component: TaskComponent,
         children: [
           {path: '', component: BasicInfoComponent},
-          {path: 'TicketCheck', component: TicketCheckComponent},
-          {path: 'PreAnalysis', component: PreAnalysisComponent},
-          {path: 'Solve', component: SolveComponent}
+          {path: 'TicketCheck/:interactionId', component: TicketCheckComponent},
+          {path: 'PreAnalysis/:interactionId', component: PreAnalysisComponent},
+          {path: 'Solve/:interactionId', component: SolveComponent},
+          {path: 'Evaluate/:interactionId', component: EvaluateComponent},
+          {path: 'Regression/:interactionId', component: RegressionComponent},
+          {path: 'Feedback/:interactionId', component: FeedbackComponent}
         ]
       },
       {path: 'history', component: HistoryComponent},

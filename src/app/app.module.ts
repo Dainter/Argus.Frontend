@@ -21,6 +21,9 @@ import { BasicInfoComponent } from './interactions/basic-info/basic-info.compone
 import { TicketCheckComponent } from './interactions/ticket-check/ticket-check.component';
 import { PreAnalysisComponent } from './interactions/pre-analysis/pre-analysis.component';
 import { SolveComponent } from './interactions/solve/solve.component';
+import { EvaluateComponent } from './interactions/evaluate/evaluate.component';
+import { RegressionComponent } from './interactions/regression/regression.component';
+import { FeedbackComponent } from './interactions/feedback/feedback.component';
 
 
 @NgModule({
@@ -39,7 +42,10 @@ import { SolveComponent } from './interactions/solve/solve.component';
     BasicInfoComponent,
     TicketCheckComponent,
     PreAnalysisComponent,
-    SolveComponent
+    SolveComponent,
+    EvaluateComponent,
+    RegressionComponent,
+    FeedbackComponent
   ],
   imports: [
     BrowserModule,

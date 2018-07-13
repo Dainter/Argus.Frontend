@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {TaskInfoService} from '../../shared/task-info.service';
+import {TaskInfoService, Task} from '../../shared/task-info.service';
+
 
 @Component({
   selector: 'app-basic-info',
@@ -8,10 +9,12 @@ import {TaskInfoService} from '../../shared/task-info.service';
 })
 export class BasicInfoComponent implements OnInit {
 
+  currentTask: Task;
+
   constructor( private taskInfoService: TaskInfoService ) { }
 
   ngOnInit() {
-    console.log(this.taskInfoService.currentTask.ID);
+    this.currentTask = this.taskInfoService.currentTask;
   }
 
 }

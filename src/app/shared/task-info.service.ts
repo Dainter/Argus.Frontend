@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {Observable} from 'rxjs';
 import {User} from './user-info.service';
 import {HttpClient} from '@angular/common/http';
-import {AbstractInteraction} from './Interactions';
+import {AbstractInteraction} from './interactions';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +16,7 @@ export class TaskInfoService {
 
   getDefaultTask(): Task {
     return new Task(
-      "", "", "", 0, "", "", "", "", "", "", [], );
+      "", "", "", 0, "", "", "", "", "", "", "", [], );
   }
 
   getHandleTasks( username: string): Observable<Task[]> {
@@ -35,6 +35,7 @@ export class Task {
     public Description: string,
     public Priority: number,
     public Version: string,
+    public CreateOn: string,
     public CreateBy: string,
     public AssignTo: string,
     public DeviceId: string,

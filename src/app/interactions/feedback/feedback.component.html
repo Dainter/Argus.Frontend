@@ -3,26 +3,26 @@
     <div class="col">
       <label for="handleByBox">Handle By:</label>
       <input type="text" class="form-control" id="handleByBox" readonly aria-describedby="Handle By"
-             value="{{ticketCheck.Handler}}">
+             value="{{feedback.Handler}}">
     </div>
     <div class="col">
       <label for="submitOnBox">Submit On:</label>
       <input type="text" class="form-control" id="submitOnBox" readonly aria-describedby="Submit On"
-             value="{{ticketCheck.CreateTime}}">
+             value="{{feedback.CreateTime}}">
     </div>
   </div>
   <div class="row">
     <div class="col">
-      <label for="resultBox">Check Result:</label>
-      <textarea type="text" class="form-control" id="resultBox" readonly aria-describedby="Check Result"
-                value="{{ticketCheck.CheckResult}}"></textarea>
+      <label for="fixPlanBox">Fix Plan:</label>
+      <textarea type="text" class="form-control" id="fixPlanBox" readonly aria-describedby="Fix Plan"
+                value="{{feedback.FixPlan}}"></textarea>
     </div>
   </div>
   <div class="row">
     <div class="col">
-      <label for="suggestionBox">Suggestion:</label>
-      <textarea type="text" class="form-control" id="suggestionBox" readonly aria-describedby="Suggestion"
-                value="{{ticketCheck.CheckSuggestion}}"></textarea>
+      <label for="feedbackBox">Feedback:</label>
+      <textarea type="text" class="form-control" id="feedbackBox" readonly aria-describedby="Feedback"
+                value="{{feedback.Feedback}}"></textarea>
     </div>
   </div>
 </div>
