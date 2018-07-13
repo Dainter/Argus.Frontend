@@ -35,7 +35,17 @@ const routes: Routes = [
           {path: 'Feedback/:interactionId', component: FeedbackComponent}
         ]
       },
-      {path: 'history', component: HistoryComponent},
+      {path: 'history', component: HistoryComponent,
+        children: [
+          {path: '', component: BasicInfoComponent},
+          {path: 'TicketCheck/:interactionId', component: TicketCheckComponent},
+          {path: 'PreAnalysis/:interactionId', component: PreAnalysisComponent},
+          {path: 'Solve/:interactionId', component: SolveComponent},
+          {path: 'Evaluate/:interactionId', component: EvaluateComponent},
+          {path: 'Regression/:interactionId', component: RegressionComponent},
+          {path: 'Feedback/:interactionId', component: FeedbackComponent}
+        ]
+      },
       {path: 'analysis', component: AnalysisComponent}
     ]
   },

@@ -26,6 +26,10 @@ export class TaskInfoService {
   getSubmitTasks( username: string ): Observable<Task[]> {
     return this.httpClient.get<any>('/api/SubmitTasks?name=' + username);
   }
+
+  getHistoryTasks(): Observable<Task[]> {
+    return this.httpClient.get<any>('/api/HistoryTasks');
+  }
 }
 
 export class Task {

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {Task, TaskInfoService} from '../shared/task-info.service';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-history',
@@ -7,7 +9,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HistoryComponent implements OnInit {
 
-  public myHistoryTasks: Array<Task>;
+  public myHistoryTasks: Observable<Task[]>;
+
+  public selectedTask = this.taskInfoService.getDefaultTask();
 
   public type: string;
 
@@ -19,17 +23,17 @@ export class HistoryComponent implements OnInit {
 
   public priorityOptions;
 
-  constructor() { }
+  constructor( private taskInfoService: TaskInfoService ) { }
 
   ngOnInit() {
-    this.myHistoryTasks = [
-      new Task(100101, "Moodlight can not work when first start it.", "VC40", "2018/4/12", "Bob", "Feedback"),
-      new Task(100102, "Somewords transient during scaning.", "VC40", "2018/5/29", "Clare", "Feedback"),
-      new Task(100103, "Wrong screen is displayed during general workflow.", "VC50", "2018/6/7", "Alice", "Feedback"),
-    ];
-
+    this.myHistoryTasks = this.taskInfoService.getHistoryTasks();
     this.TimeChartInit();
     this.PriorityChartInit();
+  }
+
+  onClick( curTask: Task){
+    this.taskInfoService.currentTask = curTask;
+    this.selectedTask = curTask;
   }
 
   TimeChartInit() {
@@ -164,17 +168,5 @@ export class HistoryComponent implements OnInit {
         },
       ],
     };
-  }
-}
-
-export class Task {
-  constructor(
-    public id: number,
-    public title: string,
-    public version: string,
-    public createOn: string,
-    public createBy: string,
-    public step: string,
-  ) {
   }
 }
