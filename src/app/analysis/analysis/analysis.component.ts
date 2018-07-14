@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Task } from '../../shared/task-info.service';
+import {DatabaseService, Graph} from '../../shared/database.service';
+import {NgxEchartsService} from 'ngx-echarts';
 
 @Component({
   selector: 'app-analysis',
@@ -10,6 +12,8 @@ import { Task } from '../../shared/task-info.service';
 export class AnalysisComponent implements OnInit {
 
   public myAnalysisTasks: Observable<Task[]>;
+
+  public myGraph: Observable<Graph>;
 
   public myUserBehaviors = [
     'Select Patient',
@@ -26,10 +30,16 @@ export class AnalysisComponent implements OnInit {
 
   chartOption;
 
-  constructor() { }
+  graphEcharts;
+
+  graphOption;
+
+  constructor( private databaseService: DatabaseService, private es: NgxEchartsService) { }
 
   ngOnInit() {
     this.onChatInit();
+
+    this.onGraphInit();
   }
 
   onChatInit() {
@@ -184,4 +194,94 @@ export class AnalysisComponent implements OnInit {
     };
   }
 
+  onGraphInit() {
+    this.myGraph = this.databaseService.getGraph();
+
+    this.myGraph.subscribe(
+      (graph: Graph) => {
+        this.onDataLoaded(graph);
+      }
+    );
+  }
+
+  onDataLoaded(graph: Graph) {
+
+    const _this = this;
+    this.graphOption = {
+      tooltip: {},
+      animationDurationUpdate: 1500,
+      animationEasingUpdate: 'quinticInOut',
+      series : [
+        {
+          type: 'graph',
+          layout: 'force',
+          symbolSize: 15,
+          roam: true,
+          zoom: 5,
+          label: {
+            normal: {
+              show: true
+            }
+          },
+          edgeSymbol: ['circle', 'arrow'],
+          edgeSymbolSize: [4, 10],
+          focusNodeAdjacency: true,
+          data: graph.nodes.map(function (node) {
+            const color = _this.getColorByType(node.type);
+            return {
+              name: node.name,
+              value: node.type,
+              itemStyle: {
+                color: color,
+                shadowColor: 'rgba(0, 0, 0, 0.5)',
+                shadowBlur: 5,
+                shadowOffsetX: 1,
+                shadowOffsetY: 1
+              },
+              tooltip: {
+                formatter: '{b}: {c}'
+              }
+            };
+          }),
+          links: graph.edges.map(function (edge) {
+            return {
+              source: edge.source,
+              target: edge.target,
+              value: edge.type
+            };
+          }),
+          lineStyle: {
+            normal: {
+              opacity: 0.9,
+              width: 2,
+              curveness: 0
+            }
+          },
+          force: {
+            repulsion: 40
+          }
+        }
+      ]
+    };
+  }
+
+  getColorByType( type: string): string {
+    switch (type)
+    {
+      case 'User' :
+        return '#4D90BF';
+      case 'UserGroup' :
+        return '#004983';
+      case 'Task' :
+        return '#19A15F';
+      case 'Procedure' :
+        return '#FFCD41';
+      case 'ProcedureStep' :
+        return '#FFE066';
+      case 'Role' :
+        return '#DE5347';
+      default :
+        return '#4682B4';
+    }
+  }
 }
