@@ -20,7 +20,7 @@ export class TaskDetailsComponent implements OnInit {
 
   }
 
-  onPageClick(id : number) {
+  onPageClick(id: number) {
     console.log(id);
   }
 

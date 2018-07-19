@@ -27,7 +27,7 @@
       <div class="card mb-3">
         <div class="card-header">
           Tasks Submitted by Me
-          <button class="btn btn-success float-right btn-sm" type="button" >+New</button>
+          <button class="btn btn-success float-right btn-sm" type="button" data-toggle="modal" data-target="#newTaskModal">+New</button>
         </div>
         <div class="card-body">
           <table class="table table-sm table-hover">
@@ -51,6 +51,76 @@
     </div>
     <div class="col-sm">
       <app-task-details [currentTask]="selectedTask" ></app-task-details>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="newTaskModal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" >New Task</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group mb-3">
+          <form [formGroup]="formModel" >
+            <div class="form-group">
+              <div class="row mb-3">
+                <div class="col">
+                  <input formControlName="title" type="text" class="form-control" aria-describedby="Task Title" placeholder="Title">
+                </div>
+                <div class="col">
+                  <select formControlName="priority" type="text" class="form-control" aria-describedby="Task Priority" value="Priority">
+                    <option value="1">Emergency</option>
+                    <option value="2">Prior</option>
+                    <option value="3" selected="selected">Normal</option>
+                  </select>
+                </div>
+              </div>
+              <div class="row mb-3">
+                <div class="col">
+                  <input formControlName="deviceID" type="text" class="form-control" aria-describedby="Device ID" placeholder="Device ID">
+                </div>
+                <div class="col">
+                  <select formControlName="version" type="text" class="form-control" aria-describedby="Version" value="Version">
+                    <option value="VC40" selected="selected">VC40</option>
+                    <option value="VC50" >VC50</option>
+                  </select>
+                </div>
+              </div>
+              <div class="row mb-3">
+                <div class="col-3">
+                  <label for="startTimeBox">Start Time:</label>
+                </div>
+                <div class="col-9">
+                  <input formControlName="startTime" type="datetime-local" id="startTimeBox" class="form-control" aria-describedby="Start Time" placeholder="Start Time">
+                </div>
+              </div>
+              <div class="row mb-3">
+                <div class="col-3">
+                  <label for="endTimeBox">End Time:</label>
+                </div>
+                <div class="col-9">
+                  <input formControlName="endTime" type="datetime-local" id="endTimeBox" class="form-control" aria-describedby="End Time" placeholder="End Time">
+                </div>
+              </div>
+              <div class="row mb-3">
+                <div class="col">
+                  <textarea formControlName="desc" type="text" class="form-control" aria-describedby="Description" placeholder="Description"></textarea>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" (click)="onSubmit()">Submit</button>
+      </div>
     </div>
   </div>
 </div>
