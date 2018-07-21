@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Task } from '../../shared/task-info.service';
+import {AnalysisTask, TaskInfoService} from '../../shared/task-info.service';
 import {DatabaseService, Graph} from '../../shared/database.service';
 import {NgxEchartsService} from 'ngx-echarts';
 
@@ -11,22 +11,11 @@ import {NgxEchartsService} from 'ngx-echarts';
 })
 export class AnalysisComponent implements OnInit {
 
-  public myAnalysisTasks: Observable<Task[]>;
+  myAnalysisTasks: AnalysisTask[];
+
+  curUserBehaviors = [];
 
   public myGraph: Observable<Graph>;
-
-  public myUserBehaviors = [
-    'Select Patient',
-    'Start Examination',
-    'Select Protocol',
-    'Confirm Position',
-    'Scan Topogram',
-    'Plan Tomogram',
-    'Scan Tomogram',
-    'Check Quality',
-    'Reconstruction',
-    'Close Patient'
-  ];
 
   chartOption;
 
@@ -34,12 +23,17 @@ export class AnalysisComponent implements OnInit {
 
   graphOption;
 
-  constructor( private databaseService: DatabaseService, private es: NgxEchartsService) { }
+  constructor( private taskInfoService: TaskInfoService, private databaseService: DatabaseService, private es: NgxEchartsService) {
+
+  }
 
   ngOnInit() {
+    this.onAnalysisTasksInit();
+
     this.onChatInit();
 
     this.onGraphInit();
+
   }
 
   onChatInit() {
@@ -265,6 +259,10 @@ export class AnalysisComponent implements OnInit {
     };
   }
 
+  onAnalysisTasksInit(){
+    this.myAnalysisTasks = this.taskInfoService.getAnalysisTasks();
+  }
+
   getColorByType( type: string): string {
     switch (type)
     {
@@ -282,6 +280,14 @@ export class AnalysisComponent implements OnInit {
         return '#DE5347';
       default :
         return '#4682B4';
+    }
+  }
+
+  onClick( curTask: AnalysisTask){
+    this.curUserBehaviors = new Array<string>();
+    for (let i = 0; i < curTask.error; i++)
+    {
+      this.curUserBehaviors.push(this.taskInfoService.userBehaviors[i]);
     }
   }
 }

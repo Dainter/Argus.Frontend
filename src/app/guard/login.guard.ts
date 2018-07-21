@@ -9,7 +9,6 @@ export class LoginGuard implements CanDeactivate<LoginComponent> {
 
   canDeactivate(component: LoginComponent ) {
     component.authentication();
-    console.log(component.isLoggedIn);
     return component.isLoggedIn;
   }
 }

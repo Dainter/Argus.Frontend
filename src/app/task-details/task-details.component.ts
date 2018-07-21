@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {AfterContentChecked, AfterContentInit, AfterViewChecked, Component, Input, OnChanges, OnInit} from '@angular/core';
 import * as $ from 'jquery';
 import {Task, TaskInfoService} from '../shared/task-info.service';
 
@@ -7,21 +7,25 @@ import {Task, TaskInfoService} from '../shared/task-info.service';
   templateUrl: './task-details.component.html',
   styleUrls: ['./task-details.component.css']
 })
-export class TaskDetailsComponent implements OnInit {
+export class TaskDetailsComponent implements OnInit, OnChanges {
 
   @Input()
   currentTask: Task;
+
+  currentPage = 0;
 
   constructor() {
 
   }
 
   ngOnInit() {
-
   }
 
   onPageClick(id: number) {
-    console.log(id);
+    this.currentPage = id + 1;
   }
 
+  ngOnChanges(): void {
+    this.currentPage = 0;
+  }
 }

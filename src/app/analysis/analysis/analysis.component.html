@@ -9,19 +9,45 @@
           <table class="table table-sm table-hover">
             <thead class="thead-light">
             <tr>
-              <th scope="col">#</th>
+              <th scope="col">ID</th>
               <th scope="col">Title</th>
               <th scope="col">Priority</th>
+              <th scope="col">Error</th>
             </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let task of myAnalysisTasks | async">
-              <th scope="row">{{task.ID}}</th>
-              <td>{{task.Title}}</td>
-              <td>{{task.Priority}}</td>
+            <tr *ngFor="let curTask of myAnalysisTasks" (click)="onClick(curTask)" >
+              <th scope="row">{{curTask.task.ID}}</th>
+              <td>{{curTask.task.Title}}</td>
+              <td>{{curTask.task.Priority}}</td>
+              <td>{{curTask.error | number: '1.0-0'}}</td>
             </tr>
             </tbody>
           </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col col-3 mb-3" *ngIf="curUserBehaviors.length > 0">
+      <div class="card mb-3">
+        <div class="card-header">
+          User Behaviors
+        </div>
+        <div class="card-body">
+          <div class="list-group" id="list-tab" role="tablist">
+            <a class="list-group-item list-group-item-action" *ngFor="let operation of curUserBehaviors">{{operation}}</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col mb-3" [class.col-9]="curUserBehaviors.length > 0">
+      <div class="card mb-3">
+        <div class="card-header">
+          KB Graph
+        </div>
+        <div class="card-body">
+          <div echarts [options]="chartOption" class="kb-chart" ></div>
         </div>
       </div>
     </div>
@@ -34,30 +60,6 @@
         </div>
         <div class="card-body">
           <div echarts [options]="graphOption" id="graph-chart" ></div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-3 mb-3">
-      <div class="card mb-3">
-        <div class="card-header">
-          User Behaviors
-        </div>
-        <div class="card-body">
-          <div class="list-group" id="list-tab" role="tablist">
-            <a class="list-group-item list-group-item-action" *ngFor="let operation of myUserBehaviors">{{operation}}</a>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="col-9 mb-3">
-      <div class="card mb-3">
-        <div class="card-header">
-          KB Graph
-        </div>
-        <div class="card-body">
-          <div echarts [options]="chartOption" class="kb-chart" ></div>
         </div>
       </div>
     </div>

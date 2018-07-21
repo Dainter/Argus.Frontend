@@ -9,10 +9,27 @@ import {AbstractInteraction} from './interactions';
 })
 export class TaskInfoService {
 
-  constructor( private httpClient: HttpClient ) {
-  }
+  private taskIndex = 100108;
 
   public currentTask: Task = this.getDefaultTask();
+
+  public myAnalysisTasks: AnalysisTask[] = [];
+
+  public userBehaviors = [
+    'Select Patient',
+    'Start Examination',
+    'Select Protocol',
+    'Confirm Position',
+    'Scan Topogram',
+    'Plan Tomogram',
+    'Scan Tomogram',
+    'Check Quality',
+    'Reconstruction',
+    'Close Patient'
+  ];
+
+  constructor( private httpClient: HttpClient ) {
+  }
 
   getDefaultTask(): Task {
     return new Task(
@@ -30,6 +47,26 @@ export class TaskInfoService {
   getHistoryTasks(): Observable<Task[]> {
     return this.httpClient.get<any>('/api/HistoryTasks');
   }
+
+  getAnalysisTasks(): AnalysisTask[] {
+    return this.myAnalysisTasks.sort((a, b) => {
+      if (a.task.ID < b.task.ID) {
+        return -1;
+      } else if (a.task.ID > b.task.ID) {
+        return 1;
+      } else {
+        return 0;
+      }
+    });
+  }
+
+  submitNewTask( newTask: Task ) {
+    newTask.ID = this.taskIndex.toString();
+    this.taskIndex ++;
+    const err = Math.random() * this.userBehaviors.length;
+    this.myAnalysisTasks.push(new AnalysisTask(newTask, 0, err));
+  }
+
 }
 
 export class Task {
@@ -47,5 +84,16 @@ export class Task {
     public EndTime: string,
     public Interactions: AbstractInteraction[]
   ) {
+  }
+}
+
+
+export class AnalysisTask {
+  constructor(
+    public task: Task,
+    public progress: number,
+    public error: number
+  ){
+
   }
 }
