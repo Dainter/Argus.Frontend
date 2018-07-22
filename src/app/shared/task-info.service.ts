@@ -24,7 +24,6 @@ export class TaskInfoService {
     'Plan Tomogram',
     'Scan Tomogram',
     'Check Quality',
-    'Reconstruction',
     'Close Patient'
   ];
 
@@ -63,8 +62,8 @@ export class TaskInfoService {
   submitNewTask( newTask: Task ) {
     newTask.ID = this.taskIndex.toString();
     this.taskIndex ++;
-    const err = Math.random() * this.userBehaviors.length;
-    this.myAnalysisTasks.push(new AnalysisTask(newTask, 0, err));
+    const err = Math.random() * (this.userBehaviors.length - 1.1);
+    this.myAnalysisTasks.push(new AnalysisTask(newTask, 0, Math.floor(err)));
   }
 
 }

@@ -17,6 +17,53 @@ export class AnalysisComponent implements OnInit {
 
   public myGraph: Observable<Graph>;
 
+  myKbChart;
+
+  workflowData: WorkflowNode[] = [
+    new WorkflowNode('Select\nPatient', 100, 100, false, false),
+    new WorkflowNode('Start\nExam', 200, 150, false, false),
+    new WorkflowNode('Select\nProtocol', 300, 200, false, false),
+    new WorkflowNode('Confirm\nPosition', 400, 250, false, false),
+    new WorkflowNode('Scan\nTopo', 500, 300, false, false),
+    new WorkflowNode('Tomo\nPlan', 600, 350, false, false),
+    new WorkflowNode('Scan\nTomo', 700, 400, false, false),
+    new WorkflowNode('Quality\nCheck', 800, 450, false, false),
+    new WorkflowNode('Close\nPatient', 900, 500, false, false),
+    new WorkflowNode('Emergency\nPatient', 100, 200, false, false),
+    new WorkflowNode('Auto\nPosition', 500, 200, false, false),
+    new WorkflowNode('Recon', 900, 400, false, false),
+  ];
+
+  workflowLink: WorkflowEdge[] = [
+    new WorkflowEdge('Select\nPatient', 'Start\nExam', 0),
+    new WorkflowEdge('Start\nExam', 'Select\nProtocol', 0),
+    new WorkflowEdge('Select\nProtocol', 'Confirm\nPosition', 0),
+    new WorkflowEdge('Confirm\nPosition', 'Scan\nTopo', 0),
+    new WorkflowEdge('Scan\nTopo', 'Tomo\nPlan', 0),
+    new WorkflowEdge('Tomo\nPlan', 'Scan\nTomo', 0),
+    new WorkflowEdge('Scan\nTomo', 'Quality\nCheck', 0),
+    new WorkflowEdge('Quality\nCheck', 'Close\nPatient', 0),
+    new WorkflowEdge('Emergency\nPatient', 'Select\nProtocol', 0),
+    new WorkflowEdge('Select\nProtocol', 'Auto\nPosition', 0),
+    new WorkflowEdge('Auto\nPosition', 'Scan\nTopo', 0),
+    new WorkflowEdge('Quality\nCheck', 'Recon', 0),
+    new WorkflowEdge('Recon', 'Close\nPatient', 0),
+    new WorkflowEdge('Select\nProtocol', 'Close\nPatient', -0.3),
+    new WorkflowEdge('Confirm\nPosition', 'Close\nPatient', -0.3),
+    new WorkflowEdge('Tomo\nPlan', 'Close\nPatient', -0.3),
+  ];
+
+  exceptionPositions = [
+    { x: 200, y: 50},
+    { x: 300, y: 100},
+    { x: 300, y: 300},
+    { x: 400, y: 400},
+    { x: 500, y: 450},
+    { x: 700, y: 300},
+    { x: 800, y: 350},
+    { x: 800, y: 550},
+  ];
+
   chartOption;
 
   graphEcharts;
@@ -37,9 +84,10 @@ export class AnalysisComponent implements OnInit {
   }
 
   onChatInit() {
+
     this.chartOption = {
       tooltip: {},
-      animationDurationUpdate: 1500,
+      animationDurationUpdate: 2000,
       animationEasingUpdate: 'quinticInOut',
       series : [
         {
@@ -68,114 +116,8 @@ export class AnalysisComponent implements OnInit {
             shadowOffsetX: 1,
             shadowOffsetY: 1
           },
-          data: [{
-            name: 'Select\nPatient',
-            x: 100,
-            y: 100
-          }, {
-            name: 'Start\nExam',
-            x: 200,
-            y: 150
-          }, {
-            name: 'Select\nProtocol',
-            x: 300,
-            y: 200
-          }, {
-            name: 'Confirm\nPosition',
-            x: 400,
-            y: 250
-          }, {
-            name: 'Scan\nTopo',
-            x: 500,
-            y: 300
-          }, {
-            name: 'Tomo\nPlan',
-            x: 600,
-            y: 350
-          }, {
-            name: 'Scam\nTomo',
-            x: 700,
-            y: 400
-          }, {
-            name: 'Quality\nCheck',
-            x: 800,
-            y: 450
-          }, {
-            name: 'Close\nPatient',
-            x: 900,
-            y: 500
-          }, {
-            name: 'Emergency\nPatient',
-            x: 100,
-            y: 200
-          }, {
-            name: 'Auto\nPosition',
-            x: 500,
-            y: 200
-          }, {
-            name: 'Recon',
-            x: 900,
-            y: 400
-          }],
-          // links: [],
-          links: [{
-            source: 0,
-            target: 1,
-          }, {
-            source: 1,
-            target: 2,
-          }, {
-            source: 2,
-            target: 3
-          }, {
-            source: 3,
-            target: 4
-          }, {
-            source: 4,
-            target: 5
-          }, {
-            source: 5,
-            target: 6
-          }, {
-            source: 6,
-            target: 7
-          }, {
-            source: 7,
-            target: 8
-          }, {
-            source: 'Emergency\nPatient',
-            target: 'Select\nProtocol'
-          }, {
-            source: 'Select\nProtocol',
-            target: 'Auto\nPosition'
-          }, {
-            source: 'Auto\nPosition',
-            target: 'Scan\nTopo'
-          }, {
-            source: 'Quality\nCheck',
-            target: 'Recon'
-          }, {
-            source: 'Recon',
-            target: 'Close\nPatient'
-          }, {
-            source: 'Select\nProtocol',
-            target: 'Close\nPatient',
-            lineStyle: {
-              normal: { curveness: -0.3 }
-            }
-          }, {
-            source: 'Confirm\nPosition',
-            target: 'Close\nPatient',
-            lineStyle: {
-              normal: { curveness: -0.3 }
-            }
-          }, {
-            source: 'Tomo\nPlan',
-            target: 'Close\nPatient',
-            lineStyle: {
-              normal: { curveness: -0.3 }
-            }
-          }],
+          data: this.dataInit( this.workflowData ),
+          links: this.linkInit( this.workflowLink ),
           lineStyle: {
             normal: {
               opacity: 0.9,
@@ -186,6 +128,41 @@ export class AnalysisComponent implements OnInit {
         }
       ]
     };
+  }
+
+  dataInit( nodes: WorkflowNode[] ){
+    const data = [];
+    for (let i = 0; i < nodes.length; i++){
+      const node = { name: '', x: 0, y: 0, itemStyle: { color: '#4682B4', borderColor: null, borderWidth: 0}};
+      node.name = nodes[i].name;
+      node.x = nodes[i].x;
+      node.y = nodes[i].y;
+      if (nodes[i].isHightLight)
+      {
+        node.itemStyle.borderColor = '#FFD700';
+        node.itemStyle.borderWidth = 2;
+      }
+      if (nodes[i].isException)
+      {
+        node.itemStyle.color = '#FF0000';
+        node.itemStyle.borderColor = '#FFD700';
+        node.itemStyle.borderWidth = 2;
+      }
+      data.push(node);
+    }
+    return data;
+  }
+
+  linkInit( edges: WorkflowEdge[] ){
+    const links = [];
+    for (let i = 0; i < edges.length; i++){
+      const link = { source: '', target: '', lineStyle: { normal: { curveness: 0}}};
+      link.source = edges[i].source;
+      link.target = edges[i].target;
+      link.lineStyle.normal.curveness = edges[i].curveness;
+      links.push(link);
+    }
+    return links;
   }
 
   onGraphInit() {
@@ -285,9 +262,104 @@ export class AnalysisComponent implements OnInit {
 
   onClick( curTask: AnalysisTask){
     this.curUserBehaviors = new Array<string>();
-    for (let i = 0; i < curTask.error; i++)
+    console.log(curTask.error);
+    for (let i = 0; i <= curTask.error; i++)
     {
       this.curUserBehaviors.push(this.taskInfoService.userBehaviors[i]);
     }
+    this.onMatchClick();
+  }
+
+  onMatchClick() {
+    this.myKbChart = this.es.echarts.getInstanceByDom(document.getElementById('kb-chart'));
+    if (this.myKbChart === undefined)
+    {
+      console.log("myKbChart is invalid.");
+      return;
+    }
+
+    let taskData = [];
+    let taskLink = [];
+    this.workflowLink.forEach( (value) => {
+      taskLink.push(value);
+    });
+    taskData = this.setHighLightNodes();
+    taskLink = this.insertErrorLink( taskLink);
+
+    this.chartOption.series[0].data = this.dataInit(taskData);
+    this.chartOption.series[0].links = this.linkInit(taskLink);
+
+    this.myKbChart.setOption(this.chartOption);
+
+  }
+
+  setHighLightNodes(): any {
+    let taskData = [];
+    for (let i = 0; i < this.workflowData.length; i++)
+    {
+      const node = this.clone(this.workflowData[i]);
+      if (i < this.curUserBehaviors.length)
+      {
+        node.isHightLight = true;
+      }
+      taskData.push(node);
+    }
+    taskData = this.insertErrorNode( taskData);
+    return taskData;
+  }
+
+  insertErrorNode( taskData: WorkflowNode[] ): any {
+    const curTaskData = taskData;
+    const position = this.exceptionPositions[this.curUserBehaviors.length - 1];
+
+    const node = new WorkflowNode( 'Error',  position.x, position.y, false, true);
+    curTaskData.push(node);
+
+    return curTaskData;
+  }
+
+  insertErrorLink( taskLink: WorkflowEdge[] ): any {
+    const curTaskLink = taskLink;
+    const position = this.exceptionPositions[this.curUserBehaviors.length - 1];
+    console.log(position);
+    const link = new WorkflowEdge('', 'Error', 0);
+    link.source = this.workflowData[this.curUserBehaviors.length - 1].name;
+    link.target = 'Error';
+    curTaskLink.push(link);
+    return curTaskLink;
+  }
+
+  private KBChartReset() {
+    this.chartOption.series[0].data = this.dataInit( this.workflowData );
+    this.chartOption.series[0].links = this.linkInit( this.workflowLink );
+    this.myKbChart.setOption(this.chartOption);
+  }
+
+  clone (obj) {
+    return JSON.parse(JSON.stringify(obj));
+  }
+
+}
+
+export class WorkflowNode {
+  constructor(
+    public name: string,
+    public x: number,
+    public y: number,
+    public isHightLight: boolean,
+    public isException: boolean
+  ){
+
+  }
+
+}
+
+export class WorkflowEdge {
+  constructor(
+    public source: string,
+    public target: string,
+    public curveness: number
+  ){
+
   }
 }

@@ -12,7 +12,7 @@
               <th scope="col">ID</th>
               <th scope="col">Title</th>
               <th scope="col">Priority</th>
-              <th scope="col">Error</th>
+              <th scope="col" hidden>Error</th>
             </tr>
             </thead>
             <tbody>
@@ -20,7 +20,7 @@
               <th scope="row">{{curTask.task.ID}}</th>
               <td>{{curTask.task.Title}}</td>
               <td>{{curTask.task.Priority}}</td>
-              <td>{{curTask.error | number: '1.0-0'}}</td>
+              <td hidden>{{curTask.error | number: '1.0-0'}}</td>
             </tr>
             </tbody>
           </table>
@@ -45,9 +45,10 @@
       <div class="card mb-3">
         <div class="card-header">
           KB Graph
+          <button class="btn btn-primary float-right btn-sm" type="button" hidden [disabled]="curUserBehaviors.length == 0" (click)="onMatchClick()">Match</button>
         </div>
         <div class="card-body">
-          <div echarts [options]="chartOption" class="kb-chart" ></div>
+          <div echarts [options]="chartOption" id="kb-chart" ></div>
         </div>
       </div>
     </div>
